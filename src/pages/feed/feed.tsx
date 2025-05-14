@@ -1,6 +1,6 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 import { useDispatch, useSelector } from '../../services/store';
 import {
@@ -13,10 +13,6 @@ export const Feed: FC = () => {
   const dispatch = useDispatch();
   const feeds = useSelector(selectFeeds);
   const isFeedsLoading: boolean = useSelector(selectIsFeedsLoading);
-
-  useEffect(() => {
-    dispatch(getFeeds());
-  }, [dispatch]);
 
   const handleGetFeeds = () => {
     dispatch(getFeeds());

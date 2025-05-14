@@ -1,11 +1,12 @@
 import { FC, useMemo, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
-import { TIngredient, TOrder } from '@utils-types';
+import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import {
   getOrder,
   selectOrderModalData,
+  selectOrder,
   selectIsOrderLoading
 } from '../../services/slices/orders';
 import {
@@ -18,7 +19,7 @@ export const OrderInfo: FC = () => {
   const { number } = useParams<{ number: string }>();
   const dispatch = useDispatch();
   const isOrderLoading = useSelector(selectIsOrderLoading);
-  const orderData = useSelector(selectOrderModalData);
+  const orderData = useSelector(selectOrder);
   const isIngredientsLoading = useSelector(selectIsIngredientsLoading);
   const ingredients: TIngredient[] = useSelector(selectIngredients);
 
@@ -67,8 +68,12 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo || isIngredientsLoading || isOrderLoading) {
+  if (isIngredientsLoading || isOrderLoading) {
     return <Preloader />;
+  }
+
+  if (!orderInfo) {
+    return null;
   }
 
   return <OrderInfoUI orderInfo={orderInfo} />;

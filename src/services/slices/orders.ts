@@ -12,6 +12,7 @@ type TOrdersState = {
   orderRequest: boolean;
   orderModalData: TOrder | null;
   orders: TOrder[];
+  order: TOrder | null;
   errorOrdersText: SerializedError | null;
   errorOrderText: SerializedError | null;
 };
@@ -22,6 +23,7 @@ export const initialState: TOrdersState = {
   orderRequest: false,
   orderModalData: null,
   orders: [],
+  order: null,
   errorOrdersText: null,
   errorOrderText: null
 };
@@ -59,6 +61,7 @@ const ordersSlice = createSlice({
     selectOrderRequest: (state) => state.orderRequest,
     selectOrderModalData: (state) => state.orderModalData,
     selectOrders: (state) => state.orders,
+    selectOrder: (state) => state.order,
     selectErrorOrdersText: (state) => state.errorOrdersText,
     selectErrorOrderText: (state) => state.errorOrderText
   },
@@ -84,7 +87,7 @@ const ordersSlice = createSlice({
       .addCase(getOrder.fulfilled, (state, action) => {
         state.isOrderLoading = false;
         state.errorOrderText = null;
-        state.orderModalData = action.payload;
+        state.order = action.payload;
       })
       .addCase(getOrder.rejected, (state, action) => {
         state.isOrderLoading = false;
@@ -92,6 +95,7 @@ const ordersSlice = createSlice({
       })
       .addCase(addOrder.pending, (state) => {
         state.orderRequest = true;
+        state.errorOrderText = null;
       })
       .addCase(addOrder.fulfilled, (state, action) => {
         state.orderRequest = false;
@@ -111,6 +115,7 @@ export const {
   selectOrderRequest,
   selectOrderModalData,
   selectOrders,
+  selectOrder,
   selectErrorOrdersText,
   selectErrorOrderText
 } = ordersSlice.selectors;

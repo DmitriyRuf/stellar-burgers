@@ -20,19 +20,28 @@ import {
   ProtectedRoute
 } from '@components';
 
-import {
-  closeModal,
-  selectIsModal
-} from '../../services/slices/burger-builder';
+import { closeModal } from '../../services/slices/burger-builder';
+import { selectIsLogin, getUser } from '../../services/slices/user';
 import { clearOrderRequest } from '../../services/slices/orders';
+import { getIngredients } from '../../services/slices/ingredients';
+import { getFeeds } from '../../services/slices/feeds';
+import { getCookie } from '../../utils/cookie';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
+import { useEffect } from 'react';
 
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isModal = useSelector(selectIsModal);
+  const isLogin = useSelector(selectIsLogin);
+  const token = getCookie('accessToken');
+  const state = location.state as { background?: Location };
+
+  useEffect(() => {
+    if (!isLogin && token) dispatch(getUser());
+    dispatch(getIngredients()).then(() => dispatch(getFeeds()));
+  }, []);
 
   const handleClose = () => {
     navigate(-1);
@@ -43,7 +52,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes location={location.state?.background || location}>
+      <Routes location={state?.background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route
@@ -106,7 +115,7 @@ const App = () => {
           }
         />
       </Routes>
-      {isModal && location.state?.background && (
+      {state?.background && (
         <Routes>
           <Route
             path='/feed/:number'
@@ -127,9 +136,11 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Детали заказа' onClose={handleClose}>
-                <OrderInfo />
-              </Modal>
+              <ProtectedRoute loginOnly>
+                <Modal title='Детали заказа' onClose={handleClose}>
+                  <OrderInfo />
+                </Modal>
+              </ProtectedRoute>
             }
           />
         </Routes>

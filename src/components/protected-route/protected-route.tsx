@@ -1,7 +1,9 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
-import { Preloader } from '../ui/preloader';
 import { selectIsLogin } from '../../services/slices/user';
+import { Preloader } from '../ui/preloader';
+import { getCookie } from '../../utils/cookie';
+const token = getCookie('accessToken');
 
 type ProtectedRouteProps = {
   loginOnly?: boolean;
@@ -14,6 +16,8 @@ export const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
   const location = useLocation();
   const isLogin = useSelector(selectIsLogin);
+
+  if (!isLogin && token) return <Preloader />;
 
   if (loginOnly && !isLogin) {
     return <Navigate replace to='/login' state={{ from: location }} />;
