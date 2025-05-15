@@ -38,15 +38,9 @@ export const loginUser = createAsyncThunk(
   async (data: TLoginData) => await loginUserApi(data)
 );
 
-export const logout = createAsyncThunk(
-  'user/logout',
-  async () => await logoutApi()
-);
+export const logout = createAsyncThunk('user/logout', logoutApi);
 
-export const getUser = createAsyncThunk(
-  'user/get',
-  async () => await getUserApi()
-);
+export const getUser = createAsyncThunk('user/get', getUserApi);
 
 export const updateUser = createAsyncThunk(
   'user/update',

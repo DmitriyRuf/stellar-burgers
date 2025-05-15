@@ -28,10 +28,7 @@ export const initialState: TOrdersState = {
   errorOrderText: null
 };
 
-export const getOrders = createAsyncThunk(
-  'orders/getAll',
-  async () => await getOrdersApi()
-);
+export const getOrders = createAsyncThunk('orders/getAll', getOrdersApi);
 
 export const getOrder = createAsyncThunk(
   'orders/get',
