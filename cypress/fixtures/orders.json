@@ -1,0 +1,48 @@
+{
+    "success": true,
+    "orders": [
+      {
+        "_id": "6834b0dec2f30c001cb2747d",
+        "ingredients": [
+          "643d69a5c3f7b9001cfa093c",
+          "643d69a5c3f7b9001cfa0941",
+          "643d69a5c3f7b9001cfa093c"
+        ],
+        "status": "done",
+        "name": "Краторный био-марсианский люминесцентный бургер",
+        "createdAt": "2025-05-25T18:20:14.250Z",
+        "updatedAt": "2025-05-25T18:20:14.970Z",
+        "number": 1
+      },
+      {
+        "_id": "6834b01fc2f30c001cb27478",
+        "ingredients": [
+          "643d69a5c3f7b9001cfa093c",
+          "643d69a5c3f7b9001cfa0941",
+          "643d69a5c3f7b9001cfa093c"
+        ],
+        "status": "done",
+        "name": "Флюоресцентный люминесцентный бургер",
+        "createdAt": "2025-05-25T18:17:03.770Z",
+        "updatedAt": "2025-05-25T18:17:04.496Z",
+        "number": 2
+      },
+
+      {
+        "_id": "6834933ac2f30c001cb273be",
+        "ingredients": [
+          "643d69a5c3f7b9001cfa093c",
+          "643d69a5c3f7b9001cfa0941",
+          "643d69a5c3f7b9001cfa0942",
+          "643d69a5c3f7b9001cfa093c"
+        ],
+        "status": "done",
+        "name": "Флюоресцентный люминесцентный бургер",
+        "createdAt": "2025-05-26T16:13:46.429Z",
+        "updatedAt": "2025-05-26T16:13:47.322Z",
+        "number": 3
+      }
+    ],
+    "total": 3,
+    "totalToday": 1
+  }

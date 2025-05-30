@@ -4,7 +4,11 @@ import {
   SerializedError
 } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { getOrdersApi, getOrderByNumberApi, orderBurgerApi } from '@api';
+import {
+  getOrdersApi,
+  getOrderByNumberApi,
+  orderBurgerApi
+} from '../../utils/burger-api';
 
 type TOrdersState = {
   isOrdersLoading: boolean;
@@ -101,7 +105,7 @@ const ordersSlice = createSlice({
       })
       .addCase(addOrder.rejected, (state, action) => {
         state.orderRequest = false;
-        state.errorOrdersText = action.error;
+        state.errorOrderText = action.error;
       });
   }
 });

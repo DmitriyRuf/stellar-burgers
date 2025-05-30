@@ -12,7 +12,7 @@ import {
   getUserApi,
   updateUserApi,
   logoutApi
-} from '@api';
+} from '../../utils/burger-api';
 
 type TUserState = {
   isUserLoading: boolean;

@@ -4,7 +4,7 @@ import {
   SerializedError
 } from '@reduxjs/toolkit';
 import { TOrdersData } from '@utils-types';
-import { getFeedsApi } from '@api';
+import { getFeedsApi } from '../../utils/burger-api';
 
 type TFeedsState = {
   isFeedsLoading: boolean;
